@@ -9,11 +9,14 @@ if(isset($_GET["id_curso"])){
 
 //print $idCurso;
 
-
 //Saída
 $disciplinaCont = new DisciplinaController();
 $disciplinas = $disciplinaCont->listarPorCurso($idCurso);
 
-print_r($disciplinas);
+//print_r($disciplinas); 
+
+print json_encode($disciplinas, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+
+
 
 ?>

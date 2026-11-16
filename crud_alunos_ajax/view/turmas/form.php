@@ -16,6 +16,7 @@ require_once(__DIR__ . "/../include/menu.php");
 //Lista de curso para carregar o combo
 $cursoCont = new CursoController();
 $cursos = $cursoCont->listar();
+
 ?>
 
 <span id="confUrlBase" 
@@ -35,7 +36,7 @@ $cursos = $cursoCont->listar();
 
             <div>
                 <label for="selCurso" class="form-label">Curso:</label>
-                <select id="selCurso" name="curso" class="form-control">
+                <select id="selCurso" name="curso" class="form-control" onchange="listarDisciplinasAssinc()">
                     <option value="0">---Selecione---</option>
                     <?php foreach($cursos as $c): ?>
                         <option value="<?= $c->getId() ?>"
@@ -49,7 +50,7 @@ $cursos = $cursoCont->listar();
 
             <div>
                 <label for="selDisciplina" class="form-label">Disciplina:</label>
-                <select id="selDisciplina" name="disciplina" class="form-control" >
+                <select id="selDisciplina" name="disciplina" class="form-control"  idSelecionada="<?= $turma && $turma->getDisciplina() ? $turma->getDisciplina()->getId() : 0 ?>">
                     
                 </select>        
             </div>
@@ -58,6 +59,7 @@ $cursos = $cursoCont->listar();
                 value="<?php echo ($turma ? $turma->getId() : 0); ?>" />
 
             <button type="submit" class="btn btn-success mt-3">Gravar</button>
+             <button type="button" class="btn btn-primary mt-3" onclick="salvarTurma()">Gravar AJAX</button>
             
         </form>
     </div>
@@ -79,6 +81,7 @@ $cursos = $cursoCont->listar();
     <a href="listar.php" class="btn btn-outline-secondary mt-3">Voltar</a>
 </div>
 
+<script src="<?= BASE_URL ?>/view/turmas/js/turmas.js"></script>
 
 <?php 
 //Inclui o FOOTER
